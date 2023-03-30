@@ -10,13 +10,13 @@ app = flask.Flask(__name__)
 
 @app.route('/')
 def index():
-    conn = psycopg2.connect(host=os.getenv('POSTGRES_HOST_EXTERNAL'),
+    conn = psycopg2.connect(host=os.getenv('POSTGRES_HOST'),
                             database=os.getenv('POSTGRES_DB'),
                             user=os.getenv('POSTGRES_USER'),
                             password=os.getenv('POSTGRES_PASSWORD'))
 
     with conn.cursor() as cur:
-        cur.execute('SELECT * FROM products')
+        cur.execute('SELECT name, category FROM products')
         rows = cur.fetchall()
 
     return flask.render_template('products.html', products=rows)
