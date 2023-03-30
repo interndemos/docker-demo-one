@@ -1,10 +1,10 @@
+import time
+
 from dotenv import load_dotenv
 import os
 import flask
 import psycopg2
-
-# to run the app:
-# python3 -m flask --app webapp run --debug -p 8888 -h 0.0.0.0
+from data_generator import generate_data
 
 app = flask.Flask(__name__)
 
@@ -23,5 +23,13 @@ def index():
 
 if __name__ == '__main__':
     load_dotenv()
+
+    retries = 0
+    while retries < 10:
+        try:
+            generate_data()
+            break
+        except:
+            time.sleep(1)
 
     app.run(debug=True, port=8888, host='0.0.0.0')

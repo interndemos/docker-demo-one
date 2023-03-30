@@ -1,0 +1,28 @@
+services:
+  database:
+      image: postgres:13.3
+      env_file:
+        - .env
+      restart: 'no'
+      ports:
+        - 127.0.0.1:5432:5432
+      volumes:
+        - demo_one_db:/var/lib/postgresql/data:rw
+
+  webapp:
+        build:
+          context: .
+          dockerfile: infrastructure/webapp/Dockerfile
+        env_file:
+          - .env
+        environment:
+          - POSTGRES_HOST=database
+        restart: 'no'
+        depends_on:
+          - database
+        ports:
+          - 80:8888
+volumes:
+  demo_one_db:
+  pgadmin:
+  pgadmin-data:
