@@ -1,0 +1,6 @@
+/web-app.log
+/webvenv/
+/.idea/
+/.env
+/static/images/
+/sales_bot.log
