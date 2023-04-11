@@ -13,8 +13,6 @@ RUN apt-get update && apt-get install -y \
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
-EXPOSE 8888
-
 COPY app.py .env ./
 COPY templates ./templates/
 
