@@ -24,5 +24,3 @@ services:
           - 80:8888
 volumes:
   demo_one_db:
-  pgadmin:
-  pgadmin-data:
